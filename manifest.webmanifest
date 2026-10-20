@@ -1,0 +1,15 @@
+{
+  "name": "名字バトル",
+  "short_name": "名字バトル",
+  "description": "土地を選んで名字を引き、その名字でメンコ勝負",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#EFE8DA",
+  "theme_color": "#B3332A",
+  "lang": "ja",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

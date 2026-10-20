@@ -1,0 +1,11 @@
+{
+  "name": "myoji-battle",
+  "version": "0.1.0",
+  "private": true,
+  "description": "名字バトル — 土地を選んで名字を引き、その名字でメンコ勝負するスマホ向けブラウザゲーム(プロトタイプ)",
+  "scripts": {
+    "start": "npx --yes serve -l 5174 .",
+    "sim": "node tools/simulate.mjs 3000",
+    "cards": "node tools/simulate.mjs 1 --cards"
+  }
+}

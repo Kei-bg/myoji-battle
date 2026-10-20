@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>名字バトル</title>
+<meta name="theme-color" content="#EFE8DA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16130F" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="名字バトル">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="src/style.css?v=dev">
+</head>
+<body>
+
+<section class="screen" id="home">
+  <header class="brand">
+    <h1>名字バトル</h1>
+    <p>土地を選んで名字を引き、その名字でメンコ勝負。</p>
+  </header>
+  <h2 class="label">どこで名字を引く?</h2>
+  <div class="prefs" id="prefs"></div>
+  <details class="rules">
+    <summary>遊び方</summary>
+    <ul>
+      <li>選んだ土地に多い名字ほど出やすい。全国で<b>珍しい名字ほど威力が高い</b>が、コストも重い</li>
+      <li>5枚引いて、コストの合計が10までになるよう3枚を選ぶ。<b>余ったコストは「応援」</b>になり、1につき3枚とも威力+1・重さ+0.5</li>
+      <li>自分の札を指で<b>後ろへ引いて離す</b>と、引いた向きの反対へ投げる。引くほど遠くへ飛ぶ</li>
+      <li>指を置いている間、勢いのゲージが満ち引きする。<b>満ちたところで離す</b>と強い</li>
+      <li>相手の札の<b>縁の近く</b>に落とすとめくれやすい。重い札(画数が多い)はめくれにくい</li>
+      <li>属性の相性: 木→土→水→火→金→木(矢印の先に強い)</li>
+      <li>先に相手の3枚をすべてめくるか場外に出したら勝ち。試合の1投目は勢いが5割まで</li>
+    </ul>
+  </details>
+  <p class="fine">名字の人数・割合は仮のデータです(実際の統計ではありません)。</p>
+</section>
+
+<section class="screen" id="draw" hidden>
+  <header class="sub">
+    <button class="link" data-go="home">← 土地を選び直す</button>
+    <h2 id="drawTitle"></h2>
+    <p class="note" id="drawNote"></p>
+  </header>
+  <div class="hand" id="hand"></div>
+  <div class="dock">
+    <p class="cost" id="cost"></p>
+    <div class="row">
+      <button class="btn" id="redraw">引き直す</button>
+      <button class="btn primary" id="go" disabled>この3枚で対戦</button>
+    </div>
+  </div>
+</section>
+
+<section class="screen" id="battle" hidden>
+  <div class="hud"><span id="foe"></span><span class="round num" id="round"></span></div>
+  <div class="field"><canvas id="cv" aria-label="メンコの場"></canvas></div>
+  <div class="hud"><span id="mine"></span><span class="gauge" aria-hidden="true"><i id="gfill"></i></span></div>
+  <p class="log" id="log"></p>
+  <p class="msg" id="msg"></p>
+</section>
+
+<div class="overlay" id="result" hidden>
+  <div class="card">
+    <h2 id="resTitle"></h2>
+    <p id="resText"></p>
+    <div class="col">
+      <button class="btn primary" id="again">同じチームでもう一度</button>
+      <button class="btn" id="redo">名字を引き直す</button>
+      <button class="btn" data-go="home">土地を選び直す</button>
+    </div>
+  </div>
+</div>
+
+<script src="src/names.js?v=dev"></script>
+<script src="src/menko.js?v=dev"></script>
+<script src="src/app.js?v=dev"></script>
+</body>
+</html>

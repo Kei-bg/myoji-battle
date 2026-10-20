@@ -1,0 +1,35 @@
+# main に push するたびに GitHub Pages へ公開する。
+# index.html の ?v=dev をコミットの短いIDに置き換え、スマホに古い JS/CSS が残らないようにする。
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build site
+        run: |
+          mkdir _site
+          cp -r index.html manifest.webmanifest src icons _site/
+          sed -i "s/?v=dev/?v=${GITHUB_SHA::7}/g" _site/index.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+      - id: deployment
+        uses: actions/deploy-pages@v4
