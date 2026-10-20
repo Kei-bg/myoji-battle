@@ -17,6 +17,14 @@
   `ELECTRON_RUN_AS_NODE=1 "$LOCALAPPDATA/Programs/Microsoft VS Code/Code.exe" tools/simulate.mjs 3000`
 - 見た目は Edge のヘッドレスで撮れる。描画幅が最小 504px なので、スマホ幅は 390px の iframe を並べたページを作って撮る(`--allow-file-access-from-files` を付けると iframe の中を操作できる)
 
+## 公開(スマホで遊ぶ)
+
+- GitHub Pages で公開している: https://kei-bg.github.io/myoji-battle/ (リポジトリ `Kei-bg/myoji-battle`、公開リポジトリ)。`main` に push すると `.github/workflows/pages.yml` が動き、1〜2分で反映される
+- **変更がひと区切りついたら commit して push する**。決まりや数値を変えたなら、push の前に sim を回す。push したら `gh run list --limit 1` で公開の成功を確かめる(PC では gh は `C:\Program Files\GitHub CLI\gh.exe`)
+- 公開時に `index.html` の `?v=dev` がコミットIDに置き換わる(古い JS/CSS が残らないように)。`<script>`/`<link>` を足すときも `?v=dev` を付ける
+- 公開するファイルは workflow の `cp` の行で決めている。トップに新しいファイルやフォルダを足したらそこにも足す
+- リポジトリは公開なので、個人的なことは書かない
+
 ## ファイル構成
 
 ```
